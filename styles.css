@@ -30,7 +30,7 @@ img { max-width: 100%; height: auto; }
 .site-nav ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem 5rem;
+  gap: 1.25rem 3rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -38,3 +38,66 @@ img { max-width: 100%; height: auto; }
 a { color: inherit; }
 .site-header a { text-decoration: none; }
 .logo { font-weight: 700; }
+
+.container {
+  max-width: 64rem;
+  margin-inline: auto;
+  padding-inline: var(--space);
+}
+.hero {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  padding-block: 3rem;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
+  line-height: 1.2;
+}
+.projects {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space);
+}
+.card {
+  padding: 1.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  background: var(--color-bg);
+}
+.card h3 { margin-top: 0; }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: var(--space);
+}
+input, textarea, button {
+  font: inherit;
+}
+input, textarea {
+  padding: 0.75rem;
+  border: 1px solid #64748b;
+  border-radius: 1rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border: 0;
+  border-radius: 0.5rem;
+  color: #ffffff;
+  background: var(--color-accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (min-width: 48rem) {
+  .hero { grid-template-columns: 2fr 1fr; }
+}
