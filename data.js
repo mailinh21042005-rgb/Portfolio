@@ -13,6 +13,7 @@ const ul = document.querySelector(
   '#project-list');
 const tpl = document.querySelector(
   '#project-card');
+const search = document.querySelector('#search')
 
 function render(list) {
   ul.textContent = '';
@@ -52,4 +53,12 @@ bar.addEventListener('click', (e) => {
         p.tags.includes(tag));
 
   render(filtered);
+});
+
+search.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    const filtered = projects.filter((p) => 
+            p.title.toLowerCase().includes(q)
+    );
+    render(filtered)
 });

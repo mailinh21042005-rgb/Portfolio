@@ -151,6 +151,15 @@ body {
     overflow-x: hidden; 
 }
 
+#search {
+    margin-bottom: 15px; 
+}
+
+#filters {
+    display: flex;
+    gap: 10px;
+}
+
 @media (max-width: 768px) {
     .skills-grid {
         grid-template-columns: 1fr;
@@ -182,8 +191,8 @@ body {
     }
 
     .card {
-        border-color: 
-        background-color:
+        border-color: #334155;
+        background-color: #1e293b;
     }
 
     input, 
