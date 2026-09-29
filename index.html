@@ -62,22 +62,14 @@
 
             <section id="projects">
                 <h2>Dự án</h2>
-                <div class="projects">
-                <article class="card">
-                    <h3>Phát triển game Asteroids</h3>
-                    <p>C++, 2025.</p>
-                </article>
-
-                <article class="card">
-                    <h3>Phát triển hệ thống phân loại bệnh trên lá lúa sử dụng SVC, KNN và Random Forest</h3>
-                    <p>Python, 2025.</p>
-                </article>
-
-                <article class="card">
-                    <h3>Phát triển tool kiểm tra cấu hình bộ điều khiển điện tử ECU</h3>
-                    <p>Python, 2026</p>
-                </article>
-                </div>
+                <div id="filters"></div>
+                <ul id="project-list" class="projects"></ul>
+                <template id="project-card">
+                    <li class="card">
+                        <h3></h3>
+                        <p class="tags"></p>
+                    </li>
+                </template>
             </section>
             
             <section id="contact">
@@ -112,5 +104,6 @@
                 </a>
             </div>
         </footer>
+        <script type="module" src="data.js"></script>
     </body>
 </html>
