@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>  
-        <header class="site-header container">
+        <header class="site-header">
             <a class="logo" href="#">Mai Linh</a>
             <nav class="site-nav">
                 <ul>
@@ -62,8 +62,11 @@
 
             <section id="projects">
                 <h2>Dự án</h2>
-                <input type="text" id="search" placeholder="Nhập tên dự án để tìm kiếm"> 
-                <div id="filters"></div>
+                <div class="search-filter-wrapper">
+                    <input type="text" id="search" placeholder="Nhập tên dự án để tìm kiếm">
+                    <div id="filters"></div>
+                </div>
+                
                 <ul id="project-list" class="projects"></ul>
                 <template id="project-card">
                     <li class="card">
@@ -105,6 +108,9 @@
                 </a>
             </div>
         </footer>
+        <a href="#contact" id="floating-contact" class="floating-btn">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Liên hệ nhanh">
+        </a>
         <script type="module" src="data.js"></script>
     </body>
 </html>

@@ -1,3 +1,4 @@
+let currentTag = 'All';
 export const projects = [
     {
         id: 1, title: 'Phát triển game Asteroids',
@@ -13,7 +14,10 @@ const ul = document.querySelector(
   '#project-list');
 const tpl = document.querySelector(
   '#project-card');
-const search = document.querySelector('#search')
+const bar = document.querySelector('#filters')
+const search = document.querySelector('#search');
+const contactSection = document.querySelector('#contact');
+const floatingBtn = document.querySelector('#floating-contact');
 
 function render(list) {
   ul.textContent = '';
@@ -27,17 +31,10 @@ function render(list) {
     ul.append(li);
   }
 }
-render(projects);
 
-const tags = [...new Set(
-    projects.flatMap((p) => p.tags),
-)];
-const bar = document.querySelector(
-    '#filters');
-
-for (const tag of ['all', ...tags]) {
-    const b = document.createElement(
-        'button');
+const tags = [...new Set(projects.flatMap((p) => p.tags))];
+for (const tag of ['All', ...tags]) {
+    const b = document.createElement('button');
     b.textContent = tag;
     b.dataset.tag = tag;
     bar.append(b);
@@ -47,18 +44,39 @@ bar.addEventListener('click', (e) => {
   const tag = e.target.dataset.tag;
   if (!tag) return;
 
-  const filtered = tag === 'all'
-    ? projects
-    : projects.filter((p) =>
-        p.tags.includes(tag));
+  currentTag = tag;
+  const q = search.value.toLowerCase().trim();
 
-  render(filtered);
+  const filtered = projects.filter((p) =>
+        (currentTag === 'All' || p.tags.includes(currentTag)) &&
+        p.title.toLowerCase().includes(q)
+    );
+
+    render(filtered);
 });
 
 search.addEventListener('input', (e) => {
     const q = e.target.value.toLowerCase().trim();
     const filtered = projects.filter((p) => 
+            (currentTag === 'All' || p.tags.includes(currentTag)) &&  
             p.title.toLowerCase().includes(q)
     );
     render(filtered)
 });
+
+if (contactSection && floatingBtn) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                floatingBtn.classList.add('show'); // Hiện nút
+            } else {
+                floatingBtn.classList.remove('show'); // Ẩn nút đi
+            }
+        });
+    }, {
+        root: null,
+        threshold: 0.1
+    });
+    observer.observe(contactSection);
+}
+render(projects);
