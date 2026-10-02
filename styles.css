@@ -304,3 +304,23 @@ body {
         color: #38bdf8;
     }
 }
+
+@media (max-width: 768px) {
+  .site-header {
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding-inline: 15px;
+  }
+  .logo {
+    font-size: 1.5rem;
+    white-space: nowrap;
+  }
+  .site-nav ul {
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  .site-nav a {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+}
