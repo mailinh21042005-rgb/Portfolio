@@ -39,6 +39,29 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 elementsToReveal.forEach(el => revealObserver.observe(el));
 
+function createSakura() {
+    const container = document.getElementById('sakura-container');
+    if (!container) return;
+
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+
+    const size = Math.random() * 7 + 8;
+    petal.style.width = `${size}px`;
+    petal.style.height = `${size}px`;
+    petal.style.left = `${Math.random() * 100}vw`;
+
+    const duration = Math.random() * 5 + 5; 
+    petal.style.animation = `fall ${duration}s linear infinite`;
+    container.appendChild(petal);
+    
+    setTimeout(() => {
+        petal.remove();
+    }, duration * 1000); 
+}
+
+setInterval(createSakura, 300);
+
 function render(list) {
   ul.textContent = '';
   for (const p of list) {
