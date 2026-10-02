@@ -18,6 +18,26 @@ const bar = document.querySelector('#filters')
 const search = document.querySelector('#search');
 const contactSection = document.querySelector('#contact');
 const floatingBtn = document.querySelector('#floating-contact');
+const elementsToReveal = document.querySelectorAll('.hero, section, .card, .skills-grid, .site-footer');
+
+elementsToReveal.forEach((el) => {
+    el.classList.add('reveal')
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active'); 
+        } else {
+            entry.target.classList.remove('active');
+        }
+    });
+}, {
+    threshold: 0,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+elementsToReveal.forEach(el => revealObserver.observe(el));
 
 function render(list) {
   ul.textContent = '';

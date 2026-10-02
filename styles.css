@@ -38,7 +38,6 @@ img { max-width: 100%; height: auto; }
   z-index: 99;
   background: rgba(202, 241, 253, 0.6);
   backdrop-filter: blur(10px);
-  border-radius: 0 0 1rem 1rem;
   width: 100%;
   max-width: 100%;
   border-radius: 1rem 1rem 1rem 1rem; 
@@ -258,6 +257,17 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease-out; 
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 @media (max-width: 768px) {
     .skills-grid {
         grid-template-columns: 1fr;
@@ -302,6 +312,11 @@ body {
 
     .skill-category h3 {
         color: #38bdf8;
+    }
+
+    #filters button {
+        color: #e2e8f0;
+        border-color: #0e80b0;
     }
 }
 
