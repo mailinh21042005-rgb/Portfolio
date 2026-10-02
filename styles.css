@@ -40,7 +40,7 @@ img { max-width: 100%; height: auto; }
   backdrop-filter: blur(10px);
   width: 100%;
   max-width: 100%;
-  border-radius: 1rem 1rem 1rem 1rem; 
+  border-radius: 0rem; 
   margin: 0;
   padding-inline: max(var(--space), calc((100vw - 64rem) / 2));
   padding-block: var(--space);
@@ -202,7 +202,7 @@ body {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  border-radius: 0;
+  border-radius: 1rem;
   transition: opacity 0.3s ease;
 }
 
@@ -247,8 +247,8 @@ body {
 }
 
 .floating-btn img {
-    width: 35px; 
-    height: 35px;
+    width: 70px; 
+    height: 60px;
     object-fit: cover;
 }
 
@@ -353,6 +353,7 @@ body {
     flex-wrap: nowrap;
     gap: 10px;
     padding-inline: 15px;
+    border-radius: 0;
   }
   .logo {
     font-size: 1.5rem;

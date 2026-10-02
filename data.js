@@ -54,7 +54,7 @@ function createSakura() {
     const duration = Math.random() * 5 + 5; 
     petal.style.animation = `fall ${duration}s linear infinite`;
     container.appendChild(petal);
-    
+
     setTimeout(() => {
         petal.remove();
     }, duration * 1000); 
