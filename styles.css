@@ -93,7 +93,28 @@ a { color: inherit; }
   border: 1px solid #cbd5e1;
   border-radius: 0.75rem;
   background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3 ease;
 }
+
+.card:hover {
+    transform: translateY(-8px); 
+    border-color: var(--color-accent); /
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3); 
+}
+
+.card:hover::after {
+    bottom: 20px; 
+    opacity: 1; 
+}
+
+.card.active-card {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+    transform: translateY(-5px);
+}
+
 .card h3 { margin-top: 0; }
 
 .field {
@@ -280,11 +301,133 @@ body {
 
 .petal {
     position: absolute;
-    background: linear-gradient(135deg, #ffb7c5, #ff9aad);
+    background: linear-gradient(135deg, #ffb7c5, #ff91a5);
     border-radius: 15px 0 15px 0;
     opacity: 0.8;
     top: -50px;
     animation: fall linear infinite;
+}
+
+#mindmap-container {
+    width: 100%;
+    overflow: hidden;
+    max-height: 0; 
+    opacity: 0;
+    margin: 0 auto;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.5s ease;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+#mindmap-container.show {
+    max-height: 600px; 
+    opacity: 1;
+    margin: 40px auto; 
+    pointer-events: auto;
+}
+
+.mindmap-canvas {
+    position: relative;
+    width: 100%;
+    max-width: 750px;
+    aspect-ratio: 750 / 500; 
+    height: auto; 
+    margin: 0 auto;   
+}
+
+.mm-node {
+    position: absolute;
+    background: #ffffff; 
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 2;
+    transition: transform 0.3s ease;
+    word-break: break-word; 
+    animation: organic-wiggle 10s ease-in-out infinite;
+}
+.mm-node:hover { 
+  transform: translate(-50%, -50%) scale(1.05) !important; 
+  animation-play-state: paused;
+}
+
+.mm-node.center {
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px; 
+    height: 120px;
+    border: 3px solid #1e3a8a;
+    color: #1e3a8a;
+    font-size: 1.1rem;
+}
+
+.mm-node.satellite {
+    width: 160px; 
+    height: 90px;
+    border: 2px solid #38bdf8;
+    color: #38bdf8;
+    font-size: 0.85rem; 
+}
+
+.mm-node.top { 
+    top: 16%; 
+    left: 13.33%; 
+    right: auto; bottom: auto; 
+    transform: translate(-50%, -50%); 
+} 
+
+.mm-node.right { 
+    top: 16%; 
+    left: 86.67%; 
+    right: auto; bottom: auto; 
+    transform: translate(-50%, -50%); 
+} 
+
+.mm-node.bottom { 
+    top: 84%; 
+    left: 86.67%; 
+    right: auto; bottom: auto; 
+    transform: translate(-50%, -50%); 
+} 
+
+.mm-node.left { 
+    top: 84%; 
+    left: 13.33%; 
+    right: auto; bottom: auto; 
+    transform: translate(-50%, -50%); 
+}
+
+.mm-svg-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; 
+}
+
+.mm-path {
+    fill: none;
+    stroke: #94a3b8; 
+    stroke-width: 3px;
+    stroke-dasharray: 8, 8; 
+    animation: flow-curve 0.8s linear infinite; 
+}
+
+@keyframes flow-curve {
+    from { stroke-dashoffset: 32; } 
+    to { stroke-dashoffset: 0; }    
+}
+
+@media (max-width: 600px) {
+    .mindmap-canvas { transform: scale(0.65); transform-origin: top center; }
 }
 
 @keyframes fall {
@@ -293,6 +436,25 @@ body {
     }
     100% {
         transform: translate(-30vw, 110vh) rotate(720deg) scale(0.8);
+    }
+}
+
+@keyframes organic-wiggle {
+    0% {
+        border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    33% {
+        border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+        transform: translate(-50%, -52%) rotate(1.5deg); 
+    }
+    66% {
+        border-radius: 225px 15px 255px 15px / 15px 255px 15px 225px;
+        transform: translate(-50%, -48%) rotate(-1.5deg); 
+    }
+    100% {
+        border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+        transform: translate(-50%, -50%) rotate(0deg);
     }
 }
 

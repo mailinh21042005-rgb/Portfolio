@@ -1,15 +1,40 @@
 let currentTag = 'All';
 export const projects = [
     {
-        id: 1, title: 'Phát triển game Asteroids',
-        tags: ['C++']},
+        id: 1, 
+        title: 'Phát triển game Asteroids',
+        tags: ['C++'],
+        mindmapData: {
+            top: 'Xây dựng thiết kế UI/UX và gameplay chiến đấu', 
+            right: 'Cải thiện trải nghiệm cho người dùng', 
+            bottom: 'C++, 2025', 
+            left: 'Nâng cấp đồ họa và âm thanh' 
+        }
+    },
     {
-        id: 2, title: 'Phát triển hệ thống phân loại bệnh trên lá lúa sử dụng SVC, KNN và Random Forest',
-        tags: ['Python']},
+        id: 2, 
+        title: 'Phát triển hệ thống phân loại bệnh trên lá lúa sử dụng SVC, KNN và Random Forest',
+        tags: ['Python'],
+        mindmapData: {
+            top: 'Sử dụng Học Máy để phân loại bệnh trên lá lúa', 
+            right: 'Phát triển giao diện web để người dùng thao tác thông qua Streamlit', 
+            bottom: 'Python, 2025', 
+            left: 'Mô hình có độ khử nhiễu tốt và độ chính xác cao' 
+        }
+    },
     {
-        id: 3, title: 'Phát triển tool kiểm tra cấu hình bộ điều khiển điện tử ECU',
-        tags: ['Python']},
+        id: 3, 
+        title: 'Phát triển tool kiểm tra cấu hình bộ điều khiển điện tử ECU',
+        tags: ['Python'],
+        mindmapData: {
+            top: 'Có thể nhận diện số liệu trong ECU Config Sheet và trích xuất sang file .seq', 
+            right: 'Chuẩn bị dữ liệu đầu vào cho tool TKWinX sử dụng để nhúng dữ liệu', 
+            bottom: 'Python, 2026', 
+            left: 'Đang tiếp tục phát triển' 
+        }
+    }
 ];
+
 const ul = document.querySelector(
   '#project-list');
 const tpl = document.querySelector(
@@ -71,6 +96,12 @@ function render(list) {
       .textContent = p.title;
     li.querySelector('.tags')
       .textContent = p.tags.join(', ');
+    const cardElement = li.querySelector('.card');
+        if (cardElement) {
+            cardElement.dataset.id = p.id;   
+            cardElement.classList.add('reveal');
+            revealObserver.observe(cardElement);
+        }
     ul.append(li);
   }
 }
@@ -123,3 +154,52 @@ if (contactSection && floatingBtn) {
     observer.observe(contactSection);
 }
 render(projects);
+
+let currentOpenCardId = null;
+
+ul.addEventListener('click', function(e) {
+    const clickedCard = e.target.closest('.card');
+    if (!clickedCard) return;
+
+    const mindmapContainer = document.querySelector('#mindmap-container');
+    if (!mindmapContainer) return; 
+
+    const mmTitle = document.querySelector('#mm-title');
+    const mmTop = document.querySelector('#mm-top');
+    const mmRight = document.querySelector('#mm-right');
+    const mmBottom = document.querySelector('#mm-bottom');
+    const mmLeft = document.querySelector('#mm-left');
+
+    const projectId = parseInt(clickedCard.dataset.id);
+
+    if (currentOpenCardId === projectId) {
+        mindmapContainer.classList.remove('show');
+        clickedCard.classList.remove('active-card');
+        currentOpenCardId = null;
+    } 
+    else {
+        const oldActiveCard = ul.querySelector('.active-card');
+        if (oldActiveCard) oldActiveCard.classList.remove('active-card');
+
+        const project = projects.find(p => p.id === projectId);
+
+        if (project) {
+            if (mmTitle) mmTitle.textContent = project.title; 
+            
+            if (project.mindmapData) {
+                if (mmTop) mmTop.textContent = project.mindmapData.top;
+                if (mmRight) mmRight.textContent = project.mindmapData.right;
+                if (mmBottom) mmBottom.textContent = project.mindmapData.bottom;
+                if (mmLeft) mmLeft.textContent = project.mindmapData.left;
+            }
+            
+            mindmapContainer.classList.add('show');
+            clickedCard.classList.add('active-card');
+            currentOpenCardId = projectId;
+            
+            setTimeout(() => {
+                mindmapContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+    }
+});
