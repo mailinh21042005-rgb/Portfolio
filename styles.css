@@ -100,7 +100,7 @@ a { color: inherit; }
 
 .card:hover {
     transform: translateY(-8px); 
-    border-color: var(--color-accent); /
+    border-color: var(--color-accent); 
     box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3); 
 }
 
@@ -330,8 +330,8 @@ body {
 .mindmap-canvas {
     position: relative;
     width: 100%;
-    max-width: 750px;
-    aspect-ratio: 750 / 500; 
+    max-width: 900px;
+    aspect-ratio: 900 / 600; 
     height: auto; 
     margin: 0 auto;   
 }
@@ -361,15 +361,15 @@ body {
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 250px; 
-    height: 120px;
+    min-height: auto;
     border: 3px solid #1e3a8a;
     color: #1e3a8a;
     font-size: 1.1rem;
 }
 
 .mm-node.satellite {
-    width: 160px; 
-    height: 90px;
+    width: 280px; 
+    min-height: auto;
     border: 2px solid #38bdf8;
     color: #38bdf8;
     font-size: 0.85rem; 
@@ -471,6 +471,41 @@ body {
     .social-links {
         flex-direction: column;
         gap: 0.5rem;
+    }
+
+    .mm-node.center {
+        width: 160px; 
+        min-height: 80px;
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+    
+    .mm-node.satellite {
+        width: 110px;
+        min-height: 65px;
+        font-size: 0.7rem;
+        padding: 5px;
+    }
+
+    .mindmap-canvas {
+        min-width: 600px;
+    }
+
+    #mindmap-container.show {
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 10px; 
+    }
+    
+    #mindmap-container::-webkit-scrollbar {
+        height: 6px;
+    }
+    #mindmap-container::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    #mindmap-container::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
     }
 }
 

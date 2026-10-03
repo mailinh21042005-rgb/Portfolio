@@ -17,7 +17,7 @@ export const projects = [
         tags: ['Python'],
         mindmapData: {
             top: 'Sử dụng Học Máy để phân loại bệnh trên lá lúa', 
-            right: 'Phát triển giao diện web để người dùng thao tác thông qua Streamlit', 
+            right: 'Giao diện web để người dùng thao tác thông qua Streamlit', 
             bottom: 'Python, 2025', 
             left: 'Mô hình có độ khử nhiễu tốt và độ chính xác cao' 
         }
@@ -27,7 +27,7 @@ export const projects = [
         title: 'Phát triển tool kiểm tra cấu hình bộ điều khiển điện tử ECU',
         tags: ['Python'],
         mindmapData: {
-            top: 'Có thể nhận diện số liệu trong ECU Config Sheet và trích xuất sang file .seq', 
+            top: 'Nhận diện số liệu trong ECU Config Sheet và trích xuất sang file .seq', 
             right: 'Chuẩn bị dữ liệu đầu vào cho tool TKWinX sử dụng để nhúng dữ liệu', 
             bottom: 'Python, 2026', 
             left: 'Đang tiếp tục phát triển' 
