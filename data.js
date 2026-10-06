@@ -1,3 +1,4 @@
+import { loadRepos } from './repos.js';
 let currentTag = 'All';
 export const projects = [
     {
@@ -35,6 +36,8 @@ export const projects = [
     }
 ];
 
+const state = document.querySelector('#repos-state');
+const list = document.querySelector('#repo-list');
 const ul = document.querySelector(
   '#project-list');
 const tpl = document.querySelector(
@@ -83,6 +86,17 @@ function createSakura() {
     setTimeout(() => {
         petal.remove();
     }, duration * 1000); 
+}
+
+function repoCard(r) {
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  a.href = r.url;
+  a.textContent = r.name;
+  const p = document.createElement('p');
+  p.textContent = `★ ${r.stars} · ${r.desc}`;
+  li.append(a, p);
+  return li;
 }
 
 setInterval(createSakura, 300);
@@ -203,3 +217,21 @@ ul.addEventListener('click', function(e) {
         }
     }
 });
+
+async function showRepos(user) {
+  state.textContent = 'Đang tải…';
+  list.textContent = '';
+  try {
+    const repos = await loadRepos(user);
+    state.textContent = repos.length ? ''
+      : 'Chưa có repo công khai.';
+    repos.forEach((r) => list.append(repoCard(r)));
+  } catch (err) {
+    state.textContent = 'Không tải được: ' + err.message;
+    const again = document.createElement('button');
+    again.textContent = 'Thử lại';
+    again.onclick = () => showRepos(user);
+    state.append(again);
+  }
+}
+showRepos('Linh Nguyễn Thị Mai');
