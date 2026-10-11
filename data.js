@@ -91,6 +91,11 @@ function createSakura() {
 function repoCard(repo) {
   const li = document.createElement('li');
   li.className = 'card';
+  const dateObj = new Date(repo.updated);
+  const formattedDate = new Intl.DateTimeFormat('vi-VN', {
+      year: 'numeric', month: 'short', day: 'numeric'
+  }).format(dateObj);
+
   li.innerHTML = `
     <h3 style="margin-bottom: 0.5rem;">
         <a href="${repo.url}" target="_blank" style="color: var(--color-accent); text-decoration: none;">${repo.name}</a>
@@ -99,6 +104,9 @@ function repoCard(repo) {
     <div style="margin-top: 10px; color: #64748b; font-weight: 600; font-size: 0.9rem;">
         ⭐ ${repo.stars}
     </div>
+    <p style="margin-top: 10px; color: #64748b; font-size: 0.85rem;">
+        Cập nhật lần cuối: ${formattedDate}
+    </p>
   `;
   return li;
 }
@@ -227,9 +235,13 @@ async function showRepos(user) {
   list.textContent = '';
   try {
     const repos = await loadRepos(user);
-    state.textContent = repos.length ? ''
-      : 'Chưa có repo công khai.';
-    repos.forEach((r) => list.append(repoCard(r)));
+    state.textContent = repos.length ? '':'Chưa có repo công khai.';
+
+    const byStars = (a, b) => b.stars - a.stars;
+    const byDate = (a, b) => new Date(b.updated) - new Date(a.updated);
+
+    repos.sort(byStars).forEach((r) => list.append(repoCard(r)));
+
   } catch (err) {
     state.textContent = 'Không tải được: ' + err.message;
     const again = document.createElement('button');
