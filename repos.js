@@ -14,6 +14,7 @@ export async function loadRepos(user) {
     url: r.html_url,
     desc: r.description ?? 'Chưa có mô tả',
     stars: r.stargazers_count,
+    updated: r.updated_at,
   }));
   writeCache(user, repos); 
   return repos;
