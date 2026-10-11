@@ -88,14 +88,18 @@ function createSakura() {
     }, duration * 1000); 
 }
 
-function repoCard(r) {
+function repoCard(repo) {
   const li = document.createElement('li');
-  const a = document.createElement('a');
-  a.href = r.url;
-  a.textContent = r.name;
-  const p = document.createElement('p');
-  p.textContent = `★ ${r.stars} · ${r.desc}`;
-  li.append(a, p);
+  li.className = 'card';
+  li.innerHTML = `
+    <h3 style="margin-bottom: 0.5rem;">
+        <a href="${repo.url}" target="_blank" style="color: var(--color-accent); text-decoration: none;">${repo.name}</a>
+    </h3>
+    <p style="margin: 0; color: var(--color-text); font-size: 0.95rem;">${repo.desc}</p>
+    <div style="margin-top: 10px; color: #64748b; font-weight: 600; font-size: 0.9rem;">
+        ⭐ ${repo.stars}
+    </div>
+  `;
   return li;
 }
 
@@ -234,4 +238,4 @@ async function showRepos(user) {
     state.append(again);
   }
 }
-showRepos('Linh Nguyễn Thị Mai');
+showRepos('mailinh21042005-rgb');
