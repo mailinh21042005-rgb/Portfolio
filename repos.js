@@ -21,7 +21,7 @@ export async function loadRepos(user) {
 
 function readCache(user) {
   const raw = localStorage.getItem('repos:' + user);
-  if (!raw) return null;6
+  if (!raw) return null;
   const { at, repos } = JSON.parse(raw);
   if (Date.now() - at > TTL) return null;
   return repos;
